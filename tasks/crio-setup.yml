@@ -1,0 +1,20 @@
+---
+- name: Download yq
+  get_url:
+    url: "{{ yq_download_url }}"
+    checksum: "{{ yq_checksum }}"
+    dest: "/usr/local/bin/yq"
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Copy the kubeadm-crio-config script
+  copy:
+    src: "kubeadm-crio-config.sh"
+    dest: "/usr/local/bin/kubeadm-crio-config.sh"
+    owner: root
+    group: root
+    mode: 0700
+
+- name: Run the kubeadm-crio-config script
+  command: "/usr/local/bin/kubeadm-crio-config.sh {{ kubeadm_crio_config }}"

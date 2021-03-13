@@ -54,3 +54,10 @@ kubernetes_flannel_manifest_file: https://raw.githubusercontent.com/coreos/flann
 
 # Calico config files
 kubernetes_calico_manifest_file: https://docs.projectcalico.org/v3.10/manifests/calico.yaml
+
+# Yq details
+yq_download_url: "https://github.com/mikefarah/yq/releases/download/v4.6.1/yq_linux_amd64"
+yq_checksum: "sha512:49ee8d73a42f570f22cc92ca4995bc1f71270f5a339ef60afb2a43332b3040a163efd258414be9f6c7541dfc6bfb3692b02ee0bf069bd6f996ac40e9b2fde807"
+
+# Crio config file
+kubeadm_crio_config: "/tmp/kubeadm-crio.yml"
