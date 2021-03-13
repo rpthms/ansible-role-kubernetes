@@ -7,6 +7,19 @@
     ansible_distribution != 'Debian'
     or ansible_distribution_major_version | int < 10
 
+- name: Load the br_netfilter module
+  modprobe:
+    name: "br_netfilter"
+    state: present
+
+- name: Ensure br_netfilter gets loaded at boot
+  copy:
+    content: "br_netfilter"
+    dest: "/etc/modules-load.d/kubernetes.conf"
+    owner: root
+    group: root
+    mode: 0644
+
 # See: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#letting-iptables-see-bridged-traffic
 - name: Let iptables see bridged traffic.
   sysctl:
