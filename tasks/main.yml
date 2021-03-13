@@ -18,6 +18,21 @@
   notify: restart kubelet
   with_items: "{{ kubernetes_packages }}"
 
+- name: Disable swap in /etc/fstab
+  lineinfile:
+    path: "/etc/fstab"
+    backrefs: yes
+    regexp: "^[^#](.+swap.+)$"
+    line: "#\1"
+
+- name: Check if swap is enabled
+  command: "swapon --show=name --noheading"
+  register: "swap_status"
+
+- name: Disable swap if enabled
+  command: "swapoff -a"
+  when: "swap_status.stdout | length > 0"
+
 - include_tasks: sysctl-setup.yml
 
 - include_tasks: kubelet-setup.yml
