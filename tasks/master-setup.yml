@@ -4,10 +4,10 @@
     kubeadm init
     --pod-network-cidr={{ kubernetes_pod_network.cidr }}
     --apiserver-advertise-address={{ kubernetes_apiserver_advertise_address | default(ansible_default_ipv4.address, true) }}
-    --kubernetes-version {{ kubernetes_version_kubeadm }}
+    --kubernetes-version={{ kubernetes_version_kubeadm }}
     --ignore-preflight-errors={{ kubernetes_ignore_preflight_errors }}
-    --config={{ kubeadm_crio_config }}
     {{ kubernetes_kubeadm_init_extra_opts }}
+#    --config={{ kubeadm_crio_config }}
   register: kubeadmin_init
   when: not kubernetes_init_stat.stat.exists
 
