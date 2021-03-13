@@ -23,11 +23,12 @@
     path: "/etc/fstab"
     backrefs: yes
     regexp: "^[^#](.+swap.+)$"
-    line: "#\1"
+    line: '#\1'
 
 - name: Check if swap is enabled
   command: "swapon --show=name --noheading"
   register: "swap_status"
+  changed_when: false
 
 - name: Disable swap if enabled
   command: "swapoff -a"
